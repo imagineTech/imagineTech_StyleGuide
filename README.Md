@@ -5,6 +5,7 @@ We will go over the Architecture and Style Guide for ImagineTech. Here are some 
   * Design Pattern
   * Folder Structure
   * Component Building
+  * Github Etiquette
 
 ## Design Pattern: 
 ImagineTech will be using a MVVM design pattern. Here's how we're breaking the parts down; 
@@ -19,11 +20,11 @@ ImagineTech will be using a MVVM design pattern. Here's how we're breaking the p
         )
       }
       ```
-  * _View Controller:_ Telling our View how to think, this will be our container file which will always placed in a index.js. 
+  * _View Controller:_ Telling our View how to think, this will be our container file. It's gets it's methods from the View Model.
     ```
     class ContainerComp extends Component {
       handlingFunction = () => {
-        /.../
+        ...
         partentDataValue = "A parent value" 
       }
 
@@ -50,7 +51,7 @@ ImagineTech will be using a MVVM design pattern. Here's how we're breaking the p
     export const reduxReducer = (state, action) {
       case "REDUX_TYPE: 
         return {
-          /.../
+          ...
         }
     }
     ```
@@ -72,3 +73,41 @@ Now with the design pattern explained, i want to go over how it will now correla
     * This folder will contain our one off type files, such as the configuration for a redux store. We will also hold our gitignore files here as this folder will hold senstive API key information.
 
   ### Folder and File Naming
+  Our naming convention will be based off Route/Feature. Such About, Contact, User, Products, Services, etc. Below is an folder example with 3 routes: 
+  ### Components 
+  ```
+  ...
+  |-/src
+  |--/components
+  |---/Home
+  |---/About
+  |---/Contact
+  ...
+  ```
+  Here's what each individual Route/Feature folder will include: 
+  ```
+  ...
+  |-/Home
+  |---index.js
+  |---Content.js
+  |---Video.js 
+  ...
+  ```
+  * _index.js_ - This is our container, every Route/Feature folder __WILL__ contain a index.js regardless of size. 
+  * _Content.js and Video.js_ - These are the components that would make up this Home page. If it was contact, it would be the form and so on. 
+
+### Screens
+Only one slight difference, in the Screens folder we will start out with only the need files. Small scale websites will usually only have one Root.js screen file. 
+```
+class ScreenRoot extends Component {
+  ...
+   <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path="/team" component={Team} />
+      <Route path="/portfolio" component={Portfolio} />
+      <Route path="/services" component={Services} />
+      <Route path="/contact" component={Contact} />
+    </Switch>
+  ...
+}
+```
