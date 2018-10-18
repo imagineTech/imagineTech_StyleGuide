@@ -7,7 +7,7 @@ We will go over the Architecture and Style Guide for ImagineTech. Here are some 
   * Component Building
 
 ## Design Pattern: 
-ImagineTech will be using a MVVM design pattern. Here's how design parts will corlate with our folder structure; 
+ImagineTech will be using a MVVM design pattern. Here's how we're breaking the parts down; 
   * _View:_ Presentational Components, only data that is displaying to the user either hard coded or from the Parent Component
     ```
     const PresComp = props => {
@@ -61,3 +61,8 @@ ImagineTech will be using a MVVM design pattern. Here's how design parts will co
     }
     ```
 ## Folder Structure
+Now with the design pattern explained, i want to go over how it will now correlate with our Folder Structure. This structure can be broken down into 4 parts: 
+  * Components
+  * Screens
+  * Repeats 
+  * Config
