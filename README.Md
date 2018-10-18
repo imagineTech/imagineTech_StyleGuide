@@ -63,6 +63,12 @@ ImagineTech will be using a MVVM design pattern. Here's how we're breaking the p
 ## Folder Structure
 Now with the design pattern explained, i want to go over how it will now correlate with our Folder Structure. This structure can be broken down into 4 parts: 
   * Components
+    * Any presentational, or container style type of component that pertain to the project. 
   * Screens
+    * You can consider this our View folder. As these components will only be used to display other components back to the user. We will also place our routing in this folder. 
   * Repeats 
+    * And repeat type of components, such as, navigation, buttons, css-based components, etc.
   * Config
+    * This folder will contain our one off type files, such as the configuration for a redux store. We will also hold our gitignore files here as this folder will hold senstive API key information.
+
+  ### Folder and File Naming
