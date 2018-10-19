@@ -146,3 +146,19 @@ Our file naming will follow a top-down method. Let's start with our container / 
   ES6 is aware that by not including a file name after a folder, that it will default to index.js. 
 
 ## Component Building
+This will consistof multiple ES6 features. Here is what we will be using: 
+  * Arrow Functions
+  * Destructuring Assignment
+  * Spread Operator
+  * Ternary Operators
+  * Template Literals 
+  * Promises
+  * Default Parameters
+
+To understand what these features are, please visit this [ES6 reference](http://es6-features.org).
+
+## Github Etiquette
+Being an efficent development team goes beyond just coding, we all have to work together to build a streamlined development process. One area of that process is Github. The following content will go over what it takes to be an maximize on what Github has to offer for teams 
+
+#### Pull Requests: 
+#### Forked Repos: 
