@@ -96,7 +96,7 @@ Now with the design pattern explained, i want to go over how it will now correla
   |---Video.js 
   ...
   ```
-  * _index.js_ - This is our container, every page/feature folder __WILL__ contain a index.js regardless of size. 
+  * _index.js_ - This is our container, every page/feature folder __WILL__ contain a index.js regardless of size.
   * _Content.js and Video.js_ - These are the components that would make up this Home page. If it was contact, it would be the form and so on. 
   * _css and main.css_ - Each page/feature will have either one main css file, when a directory reaches over 5 css files, then it will be moved into it's own css sub-directory. 
 
@@ -106,13 +106,11 @@ Now with the design pattern explained, i want to go over how it will now correla
    * You may come across a situation where the amount of content for a page/feature doesn't need more than one component and it would seem logical to write all of that content in the `index.js` file. However, while keeping scalability and testing in mind, we must leave `index.js` as a container that holds the components together. Any JSX should be written as an individual component regardless of the size. 
 
   *Referencing other Components*
-   * To continue using a MVVM pattern, any reference of one particular page/feature component in another must be done via the __Screens__ directory. This sort of referencing is dealing with how the user *views* the screen, which means this is part of the __View__ layer. 
-
-   *React's Children via Props*
-
+   * To continue following a MVVM pattern, any reference of one particular page/feature component in another must be done via the __Screens__ directory. This sort of referencing is dealing with how the user *views* the screen, which means this is part of the __View__ layer. 
+   * Currently, any reason not to follow this pattern would be because components need to share data from other sources. And if so, it would be best to use React's `this.props.children` for this sort of reference.  
   
 #### Screens
-Only one slight difference, in the Screens folder we will start out with only the need files. Small scale websites will usually only have one Root.js screen file. 
+This is where we build our View layer, this is what the user will see on their screen. Small scale websites will usually only have one Root.js screen file.  
 ```
 class ScreenRoot extends Component {
   ...
@@ -124,19 +122,19 @@ class ScreenRoot extends Component {
   ...
 }
 ```
-As you can see, Screens are going to be for our View layer and where React Router will take place. If the site begans to scale than you would follow the saming folder naming conventation, seperated by page/feature. 
+  The components being used in this directory are the page/feature containers from components directory. If the site begans to scale than you would follow the saming folder naming conventation, seperated by page/feature. 
 
-If a project doesn't require React Router, you willd build the same way just without using any components from React Router: 
+  If a project doesn't require React Router, you willd build the same way just without using any components from React Router: 
 
-```
-...
-<div>
-  <Home />
-  <About />
-  <Contact />
-</div>
-...
-```
+  ```
+  ...
+  <div>
+    <Home />
+    <About />
+    <Contact />
+  </div>
+  ...
+  ```
 
 ### File Naming
 Our file naming will follow a top-down method. Let's start with our container / index.js file. The start of the name will be after the page/feature, and the last portion will be the name of the file within that page/feature. Example: 
@@ -185,7 +183,7 @@ This will consistof multiple ES6 features. Here is what we will be using:
 To understand what these features are, please visit this [ES6 reference](http://es6-features.org).
 
 ## Github Etiquette
-Being an efficent development team goes beyond just coding, we all have to work together to build a streamlined development process. One area of that process is Github. The following content will go over what it takes to be an maximize on what Github has to offer for teams. Please note that this under the assumption you're connected with the ImagineTech Organization. 
+Being an efficent development team goes beyond just coding, we all have to work together to build a streamlined development process. One area of that process is Github. The following content will go over what it takes to maximize on what Github has to offer for teams. Please note that this under the assumption you're connected with the ImagineTech Organization. 
 
 #### Forked Repos: 
 All assigned team members to a project will have to fork over a copy to their local machine. No one should work directly with repo's master branch unless specifically assigned to. 
