@@ -117,19 +117,6 @@ Here's what each individual page/feature folder will include:
 - _Content.js and Video.js_ - These are the components that would make up this Home page. If it was contact, it would be the form and so on.
 - _css and main.css_ - Each page/feature will have either one main css file, when a directory reaches over 5 css files, then it will be moved into it's own css sub-directory.
 
-#### Things to Consider
-
----
-
-_Size of the Component_
-
-- You may come across a situation where the amount of content for a page/feature doesn't need more than one component and it would seem logical to write all of that content in the `index.js` file. However, while keeping scalability and testing in mind, we must leave `index.js` as a container that holds the components together. Any JSX should be written as an individual component regardless of the size.
-
-_Referencing other Components_
-
-- To continue following a MVVM pattern, any reference of one particular page/feature component in another must be done via the **Screens** directory. This sort of referencing is dealing with how the user _views_ the screen, which means this is part of the **View** layer.
-- Currently, any reason not to follow this pattern would be because components need to share data from other sources. And if so, it would be best to use React's `this.props.children` for this sort of reference.
-
 #### Screens
 
 This is where we build our View layer, this is what the user will see on their screen. Small scale websites will usually only have one Root.js screen file.
@@ -214,6 +201,19 @@ This will consistof multiple ES6 features. Here is what we will be using:
 - Default Parameters
 
 To understand what these features are, please visit this [ES6 reference](http://es6-features.org).
+
+#### Things to consider when building your Components
+
+---
+
+_Size of the Component_
+
+- You may come across a situation where the amount of content for a page/feature doesn't need more than one component and it would seem logical to write all of that content in the `index.js` file. However, while keeping scalability and testing in mind, we must leave `index.js` as a container that holds the components together. Any JSX should be written as an individual component regardless of the size.
+
+_Composition (Referencing other Components)_
+
+- To continue following a MVVM pattern, any reference of one particular page/feature component in another must be done via the **Screens** directory. This sort of referencing is dealing with how the user _views_ the screen, which means this is part of the **View** layer.
+- Currently, any reason not to follow this pattern would be because components need to share data from other sources. And if so, it would be best to use React's `this.props.children` for this sort of reference.
 
 ## Github Etiquette
 
