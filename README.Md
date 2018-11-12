@@ -20,7 +20,7 @@ ImagineTech will be using a MVVM design pattern. Here's how we're breaking the p
         )
       }
       ```
-  * _View Controller:_ Telling our View how to think, this will be our container file. It's gets it's methods from the View Model.
+  * _View Controller:_ Telling our View how to think, this will be our container file. It's gets it's methods from the View Model. General use from these files are holding all of the page/feature components together and placing any common VM/M methods that the components will need at some point in time.
     ```
     class ContainerComp extends Component {
       handlingFunction = () => {
