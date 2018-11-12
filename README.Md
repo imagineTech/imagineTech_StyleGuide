@@ -8,6 +8,7 @@ We will go over the Architecture and Style Guide for ImagineTech. Here are some 
 - Folder Structure
 - Component Building
 - Github Etiquette
+- Prettier Configuration
 
 ## Design Pattern:
 
@@ -233,3 +234,26 @@ Before diving in, please understand that Pull Requests aren't just about Merging
 - All PRs will follow a Forked Master into Main Master merge flow. Once you have finish your commits/goal/feautre from your Forked Repo, you will then perform a PR onto the Main Master.
 - We require at least one person to be assigned to review the PR, default is the Team Architect or your Team Lead.
 - Make sure PRs are apporiate, if you have a question, or can't figure out a bug then that's not a good reason for a pull request. If you are wanting to imporve a feature/code base or even correct grammer and spelling, then submitting a pull request would be your best bet.
+
+## Prettier Configuration
+
+To make sure we also upkeep a consistent, best practice code style, we will be working with Prettier and with the use of CRA (Create-React-App), we can place the following configuration for prettier within our `package.json` file:
+
+```
+  "eslintConfig": {
+    "extends": "react-app",
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": "error"
+    },
+    "husky": {
+      "hooks": {
+        "pre-commit": "pretty-quick --staged"
+      }
+    }
+  }
+```
+
+Please note that we are using `devDependencies` such as `eslint-plugin-prettier`, `husky`, and `pretty-quick`. Also any additional prettier configuration should be done in a `.prettierrc.json` file.
