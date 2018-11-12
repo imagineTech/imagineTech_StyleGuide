@@ -25,6 +25,35 @@ ImagineTech will be using a MVVM design pattern. Here's how we're breaking the p
     }
   ```
 - _View Controller:_ Telling our View how to think, this will be our container file. It's gets it's methods from the View Model. General use from these files are holding all of the page/feature components together and placing any common VM/M methods that the components will need at some point in time.
+  ```
+  class ContainerComp extends Component {
+    handlingFunction = () => {
+      ...
+      partentDataValue = "A parent value"
+    }
+  ```
+
+* Design Pattern
+* Folder Structure
+* Component Building
+* Github Etiquette
+
+## Design Pattern:
+
+ImagineTech will be using a MVVM design pattern. Here's how we're breaking the parts down;
+
+- _View:_ Presentational Components, only data that is displaying to the user either hard coded or from the Parent Component
+  ```
+  const PresComp = props => {
+      return (
+        <div>
+          <h1>Hello</h1>
+          <p>{props.parentDataValue}</p>
+        </div>
+      )
+    }
+  ```
+- _View Controller:_ Telling our View how to think, this will be our container file. It's gets it's methods from the View Model. General use from these files are holding all of the page/feature components together and placing any common VM/M methods that the components will need at some point in time.
 
   ```
   class ContainerComp extends Component {
