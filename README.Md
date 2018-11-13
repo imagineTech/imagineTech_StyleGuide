@@ -215,6 +215,12 @@ _Composition (Referencing other Components)_
 - To continue following a MVVM pattern, any reference of one particular page/feature component in another must be done via the **Screens** directory. This sort of referencing is dealing with how the user _views_ the screen, which means this is part of the **View** layer.
 - Currently, any reason not to follow this pattern would be because components need to share data from other sources. And if so, it would be best to use React's `this.props.children` for this sort of reference.
 
+_Page versus Feature_
+
+- At some point in a project, it will scale to where Features are clearly separate from Pages. An example would be creating, storing, and referencing User Data. This would require a lot more files that are more than just dealing with the View layer.
+
+  Two subcategories will then be created from components, one for Page and the other for Feature. The real difference is that Feature(s) will store files relevant to the View-Model/Model layer, allowing for the `index.js` to be nothing more than a group of method/function/classes being exported at once for easier reference whenever needed. 
+
 ## Github Etiquette
 
 Being an efficent development team goes beyond just coding, we all have to work together to build a streamlined development process. One area of that process is Github. The following content will go over what it takes to maximize on what Github has to offer for teams. Please note that this under the assumption you're connected with the ImagineTech Organization.
