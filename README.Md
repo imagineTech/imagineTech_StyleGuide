@@ -82,6 +82,17 @@ Now with the design pattern explained, i want to go over how it will now correla
 - Config
   - This folder will contain our one off type files, such as the configuration for a redux store. We will also hold our gitignore files here as this folder will hold senstive API key information.
 
+  A quick example would like so: 
+  ```
+  ...
+  |-/src
+  |--/components
+  |--/screens
+  |--/repeats
+  |--/config
+  ...
+  ```
+
 ### Folder Naming
 
 Our naming convention will be based off page/feature. Such About, Contact, User, Products, Services, etc. Below is an folder example with 3 routes:
