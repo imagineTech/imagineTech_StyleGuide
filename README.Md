@@ -5,7 +5,7 @@
 We will go over the Architecture and Style Guide for ImagineTech. Here are some things we will be covering:
 
 - Design Pattern
-- Folder Structure
+- Directory Structure
 - Component Building
 
 ## Design Pattern:
@@ -69,18 +69,18 @@ ImagineTech will be using a MVVM design pattern. Here's how we're breaking the p
   }
   ```
 
-## Folder Structure
+## Directory Structure
 
-Now with the design pattern explained, i want to go over how it will now correlate with our Folder Structure. This structure can be broken down into 4 parts:
+Now with the design pattern explained, i want to go over how it will now correlate with our Directory Structure. This structure can be broken down into 4 parts:
 
 - Components
   - Any presentational, or container style type of component that pertain to the project.
 - Screens
-  - You can consider this our View folder. As these components will only be used to display other components back to the user. We will also place our routing in this folder.
+  - You can consider this our View directory. As these components will only be used to display other components back to the user. We will also place our routing in this directory.
 - Repeats
   - And repeat type of components, such as, navigation, buttons, css-based components, etc.
 - Config
-  - This folder will contain our one off type files, such as the configuration for a redux store. We will also hold our gitignore files here as this folder will hold senstive API key information.
+  - This directory will contain our one off type files, such as the configuration for a redux store. We will also hold our gitignore files here as this directory will hold senstive API key information.
 
   A quick example would like so: 
   ```
@@ -93,11 +93,13 @@ Now with the design pattern explained, i want to go over how it will now correla
   ...
   ```
 
-### Folder Naming
+### Directory and File setup
 
-Our naming convention will be based off page/feature. Such About, Contact, User, Products, Services, etc. Below is an folder example with 3 routes:
+There are a few moving parts when looking creating directories for the project and the files that will correlate within them. Let us look at our two more domainant directories, Components and Screens.
 
 #### Components
+
+Our naming convention will be based off page/feature. Such as About, Contact, User, Products, Services, etc. Below is an directory example with 3 pages:
 
 ```
 ...
@@ -109,7 +111,7 @@ Our naming convention will be based off page/feature. Such About, Contact, User,
 ...
 ```
 
-Here's what each individual page/feature folder will include:
+Now let's talk about what file(s) will be included in each directory. Here's what each individual page/feature directory will include:
 
 ```
 ...
@@ -122,39 +124,22 @@ Here's what each individual page/feature folder will include:
 ...
 ```
 
-- _index.js_ - This is our container, every page/feature folder **WILL** contain a index.js regardless of size.
+- _index.js_ - This is our container, every page/feature directory **WILL** contain a index.js regardless of size.
 - _Content.js and Video.js_ - These are the components that would make up this Home page. If it was contact, it would be the form and so on.
 - _css and main.css_ - Each page/feature will have either one main css file, when a directory reaches over 5 css files, then it will be moved into it's own css sub-directory.
 
 #### Screens
 
-This is where we build our View layer, this is what the user will see on their screen. Small scale websites will usually only have one Root.js screen file.
-
-```
-class ScreenRoot extends Component {
+We can expect most projects to contain no more than few files when looking within the Screen files. The most common one being Root.js (more on this later), any other file could be dealing with nested routes/components that need to have their own file. 
+  ```
   ...
-   <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path="/team" component={About} />
-      <Route path="/contact" component={Contact} />
-    </Switch>
+  |-/src
+  |--/screens
+  |---/Root.js
+  |---/NestedRoute.js
   ...
-}
-```
-
-The components being used in this directory are the page/feature containers from components directory. If the site begans to scale than you would follow the saming folder naming conventation, seperated by page/feature.
-
-If a project doesn't require React Router, you willd build the same way just without using any components from React Router:
-
-```
-...
-<div>
-  <Home />
-  <About />
-  <Contact />
-</div>
-...
-```
+  ```
+In this example, `NestedRoute.js` has been seperated from the main `Root` due to it's volume. You'll see more on what that means later on the Component Building section. 
 
 ### File Naming
 
@@ -183,23 +168,23 @@ index.js
 ...
 ```
 
-We start off with Form.js, if follow the top-down folder naming, you can see how i came up with ContactForm and ContactContainer (index.js is our container) Something else to consider is that we will not be using extensions in our imports, as ES6 doesn't require '.js'.
+We start off with Form.js, if follow the top-down directory naming, you can see how i came up with ContactForm and ContactContainer (index.js is our container) Something else to consider is that we will __not__ be using extensions in our imports, as ES6 doesn't require `.js`.
 
 ```
 import ContactForm from './Form'
 ```
 
-Also we will not include 'index.js' when importing our container, we will allow ES6 to choose it for us like so;
+Also we will not include `index.js` when importing our container, we will allow ES6 to choose it for us like so;
 
 ```
 import Contact from '../components/Contact';
 ```
 
-ES6 is aware that by not including a file name after a folder, that it will default to index.js.
+ES6 is aware that by not including a file name after a directory, that it will default to `index.js`.
 
 ## Component Building
 
-This will consistof multiple ES6 features. Here is what we will be using:
+Now we will look at what goes into building these files, what goes into building components for pages, features and screens. Before we can begin, there are ES6 features you should know ahead of time. Here's the list of those features:
 
 - Arrow Functions
 - Destructuring Assignment
@@ -209,7 +194,55 @@ This will consistof multiple ES6 features. Here is what we will be using:
 - Promises
 - Default Parameters
 
-To understand what these features are, please visit this [ES6 reference](http://es6-features.org).
+To understand what they are, please visit [here](http://es6-features.org).
+
+### Components
+
+#### Containers
+
+To start off, let's look at how a simple `index.js` is build.   First, our container will host any methods that deal with redux, a 3rd party or an API call. 
+  ```
+  ...
+  class PageContainer extends Component { 
+    ...
+    comoponentDidMount() {
+      someAPIMethod()
+    }
+
+    someMethod = () => {
+      aThirdPartyMethod();
+    }
+    ...
+  }
+  ```
+Next, we need to look at how stateless components will be setup. We will arrange the stateless components based on how we want the page to initally look. Here's where we will also send data down via `this.props`. 
+  ```
+  class PageContainer extends Component {
+    ...
+    render() {
+      <div>
+        <PageContent />
+        <PageForm submit={this.submit} />
+        <PageImage />
+      </div>
+    }
+    ...
+  }
+  ```
+#### Presentational
+
+During a project we will need to write components that show the user the releated page content. These presentational or stateless components will hold this content. Here's how a simple one is setup: 
+  ```
+  ...
+  const PageContent = ({ somePropsMethod, anotherProps }) => {
+    return (
+      <div className="page-related-css-name">
+        <p> I am some content related to the page. </p>
+      </div>
+    )
+  }
+  ...
+  ```
 
 #### Things to consider when building your Components
 
@@ -229,3 +262,35 @@ _Page versus Feature_
 - At some point in a project, it will scale to where Features are clearly separate from Pages. An example would be creating, storing, and referencing User Data. This would require a lot more files that are more than just dealing with the View layer.
 
   Two subcategories will then be created from components, one for Page and the other for Feature. The real difference is that Feature(s) will store files relevant to the View-Model/Model layer, allowing for the `index.js` to be nothing more than a group of method/function/classes being exported at once for easier reference whenever needed. 
+
+### Screens
+
+This is where we build our View layer, this is what the user will see on their screen. Small scale websites will usually only have one Root.js screen file.
+
+```
+class ScreenRoot extends Component {
+  ...
+   <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path="/team" component={About} />
+      <Route path="/contact" component={Contact} />
+    </Switch>
+  ...
+}
+```
+
+The components being used in this directory are the page/feature containers from components directory. If the site begans to scale than you would follow the saming directory naming conventation, seperated by page/feature.
+
+If a project doesn't require React Router, you willd build the same way just without using any components from React Router:
+
+```
+...
+<div>
+  <Home />
+  <About />
+  <Contact />
+</div>
+...
+```
+
+
