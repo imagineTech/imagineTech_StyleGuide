@@ -12,7 +12,7 @@ We will go over the Architecture and Style Guide for ImagineTech. Here are some 
 
 ImagineTech will be using a MVVM design pattern. Here's how we're breaking the parts down;
 
-- _View:_ Presentational Components, only data that is displaying to the user either hard coded or from the Parent Component
+- _View:_ Presentational Components, only data that is displaying to the user, either hard coded or from the Parent Component.
   ```
   const PresComp = props => {
       return (
@@ -74,14 +74,20 @@ ImagineTech will be using a MVVM design pattern. Here's how we're breaking the p
 Now with the design pattern explained, i want to go over how it will now correlate with our Directory Structure. This structure can be broken down into 4 parts:
 
 - Components
-  - Any presentational, or container style type of component that pertain to the project.
+
+  Any presentational, or container style type of component that pertain to the project's pages or features.
+
 - Screens
-  - You can consider this our View directory. As these components will only be used to display other components back to the user. We will also place our routing in this directory.
+
+  These components will only be used to display other components back to the user. We will also place our routing in this directory.
+
 - Repeats
-  - And repeat type of components, such as, navigation, buttons, css-based components, etc.
+
+  Any repeat type of components, such as, navigation, buttons, css-based components, etc.
+
 - Config
 
-  - This directory will contain our one off type files, such as the configuration for a redux store. We will also hold our gitignore files here as this directory will hold senstive API key information.
+  This directory will contain our one off type files, such as the configuration for a redux store. We will also hold our gitignore files here as this directory will hold senstive API key information.
 
   A quick example would like so:
 
@@ -132,7 +138,7 @@ Now let's talk about what file(s) will be included in each directory. Here's wha
 
 #### Screens
 
-We can expect most projects to contain no more than few files when looking within the Screen files. The most common one being Root.js (more on this later), any other file could be dealing with nested routes/components that need to have their own file.
+We can expect most projects to contain no more than few files when looking within the Screen directory. The most common one being Root.js, any other file could be dealing with nested routes/components that need to have their own file.
 
 ```
 ...
@@ -147,7 +153,7 @@ In this example, `NestedRoute.js` has been seperated from the main `Root` due to
 
 ### File Naming
 
-Our file naming will follow a top-down method. Let's start with our container / index.js file. The start of the name will be after the page/feature, and the last portion will be the name of the file within that page/feature. Example:
+Our file naming will follow a top-down method. Let's start with our container / index.js file. The first portion of the name will be after the page/feature directory, and the last portion will be the name of the file within that page/feature directory. Example:
 
 ```
 ...
@@ -172,7 +178,7 @@ index.js
 ...
 ```
 
-We start off with Form.js, if follow the top-down directory naming, you can see how i came up with ContactForm and ContactContainer (index.js is our container) Something else to consider is that we will **not** be using extensions in our imports, as ES6 doesn't require `.js`.
+We start off with `Form.js`, if follow the top-down directory naming, you can see how i came up with ContactForm and ContactContainer (`index.js` is our container) Something else to consider is that we will **not** be using extensions in our imports, as ES6 doesn't require `.js`.
 
 ```
 import ContactForm from './Form'
@@ -263,7 +269,7 @@ _Size of the Component_
 
 _Composition (Referencing other Components)_
 
-- To continue following a MVVM pattern, any reference of one particular page/feature component in another must be done via the **Screens** directory. This sort of referencing is dealing with how the user _views_ the screen, which means this is part of the **View** layer.
+- To continue following a MVVM pattern, any reference of one particular page/feature component in another must be done via the **Screens** directory. This sort of referencing is dealing with how the user _views_ the screen, which means this is part of the **View** layer. When working with within a individual page/feature then those releated components should all be listed/built within the `index.js` container and then displayed within **Screens**
 - Currently, any reason not to follow this pattern would be because components need to share data from other sources. And if so, it would be best to use React's `this.props.children` for this sort of reference.
 
 _Page versus Feature_
@@ -274,7 +280,7 @@ _Page versus Feature_
 
 ### Screens
 
-This is where we build our View layer, this is what the user will see on their screen. Small scale websites will usually only have one Root.js screen file. The example below shows how this would be built with React Router
+This is where we display our View layer, this is what the user will see on their screen. Small scale websites will usually only have one Root.js screen file. The example below shows how this would be built with React Router
 
 ```
 class ScreenRoot extends Component {
