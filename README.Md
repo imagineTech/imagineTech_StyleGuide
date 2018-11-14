@@ -80,9 +80,11 @@ Now with the design pattern explained, i want to go over how it will now correla
 - Repeats
   - And repeat type of components, such as, navigation, buttons, css-based components, etc.
 - Config
+
   - This directory will contain our one off type files, such as the configuration for a redux store. We will also hold our gitignore files here as this directory will hold senstive API key information.
 
-  A quick example would like so: 
+  A quick example would like so:
+
   ```
   ...
   |-/src
@@ -130,16 +132,18 @@ Now let's talk about what file(s) will be included in each directory. Here's wha
 
 #### Screens
 
-We can expect most projects to contain no more than few files when looking within the Screen files. The most common one being Root.js (more on this later), any other file could be dealing with nested routes/components that need to have their own file. 
-  ```
-  ...
-  |-/src
-  |--/screens
-  |---/Root.js
-  |---/NestedRoute.js
-  ...
-  ```
-In this example, `NestedRoute.js` has been seperated from the main `Root` due to it's volume. You'll see more on what that means later on the Component Building section. 
+We can expect most projects to contain no more than few files when looking within the Screen files. The most common one being Root.js (more on this later), any other file could be dealing with nested routes/components that need to have their own file.
+
+```
+...
+|-/src
+|--/screens
+|---/Root.js
+|---/NestedRoute.js
+...
+```
+
+In this example, `NestedRoute.js` has been seperated from the main `Root` due to it's volume. You'll see more on what that means later on the Component Building section.
 
 ### File Naming
 
@@ -168,7 +172,7 @@ index.js
 ...
 ```
 
-We start off with Form.js, if follow the top-down directory naming, you can see how i came up with ContactForm and ContactContainer (index.js is our container) Something else to consider is that we will __not__ be using extensions in our imports, as ES6 doesn't require `.js`.
+We start off with Form.js, if follow the top-down directory naming, you can see how i came up with ContactForm and ContactContainer (index.js is our container) Something else to consider is that we will **not** be using extensions in our imports, as ES6 doesn't require `.js`.
 
 ```
 import ContactForm from './Form'
@@ -200,49 +204,54 @@ To understand what they are, please visit [here](http://es6-features.org).
 
 #### Containers
 
-To start off, let's look at how a simple `index.js` is build.   First, our container will host any methods that deal with redux, a 3rd party or an API call. 
-  ```
-  ...
-  class PageContainer extends Component { 
-    ...
-    comoponentDidMount() {
-      someAPIMethod()
-    }
+To start off, let's look at how a simple `index.js` is build. First, our container will host any methods that deal with redux, a 3rd party or an API call.
 
-    someMethod = () => {
-      aThirdPartyMethod();
-    }
-    ...
+```
+...
+class PageContainer extends Component {
+  ...
+  comoponentDidMount() {
+    someAPIMethod()
   }
-  ```
-Next, we need to look at how stateless components will be setup. We will arrange the stateless components based on how we want the page to initally look. Here's where we will also send data down via `this.props`. 
-  ```
-  class PageContainer extends Component {
-    ...
-    render() {
-      <div>
-        <PageContent />
-        <PageForm submit={this.submit} />
-        <PageImage />
-      </div>
-    }
-    ...
+
+  someMethod = () => {
+    aThirdPartyMethod();
   }
-  ```
+  ...
+}
+```
+
+Next, we need to look at how stateless components will be setup. We will arrange the stateless components based on how we want the page to initally look. Here's where we will also send data down via `this.props`.
+
+```
+class PageContainer extends Component {
+  ...
+  render() {
+    <div>
+      <PageContent />
+      <PageForm submit={this.submit} />
+      <PageImage />
+    </div>
+  }
+  ...
+}
+```
+
 #### Presentational
 
-During a project we will need to write components that show the user the releated page content. These presentational or stateless components will hold this content. Here's how a simple one is setup: 
-  ```
-  ...
-  const PageContent = ({ somePropsMethod, anotherProps }) => {
-    return (
-      <div className="page-related-css-name">
-        <p> I am some content related to the page. </p>
-      </div>
-    )
-  }
-  ...
-  ```
+During a project we will need to write components that show the user the releated page content. These presentational or stateless components will hold this content. Here's how a simple one is setup:
+
+```
+...
+const PageContent = ({ somePropsMethod, anotherProps }) => {
+  return (
+    <div className="page-related-css-name">
+      <p> I am some content related to the page. </p>
+    </div>
+  )
+}
+...
+```
 
 #### Things to consider when building your Components
 
@@ -261,11 +270,11 @@ _Page versus Feature_
 
 - At some point in a project, it will scale to where Features are clearly separate from Pages. An example would be creating, storing, and referencing User Data. This would require a lot more files that are more than just dealing with the View layer.
 
-  Two subcategories will then be created from components, one for Page and the other for Feature. The real difference is that Feature(s) will store files relevant to the View-Model/Model layer, allowing for the `index.js` to be nothing more than a group of method/function/classes being exported at once for easier reference whenever needed. 
+  Two subcategories will then be created from components, one for Page and the other for Feature. The real difference is that Feature(s) will store files relevant to the View-Model/Model layer, allowing for the `index.js` to be nothing more than a group of method/function/classes being exported at once for easier reference whenever needed.
 
 ### Screens
 
-This is where we build our View layer, this is what the user will see on their screen. Small scale websites will usually only have one Root.js screen file.
+This is where we build our View layer, this is what the user will see on their screen. Small scale websites will usually only have one Root.js screen file. The example below shows how this would be built with React Router
 
 ```
 class ScreenRoot extends Component {
@@ -279,8 +288,6 @@ class ScreenRoot extends Component {
 }
 ```
 
-The components being used in this directory are the page/feature containers from components directory. If the site begans to scale than you would follow the saming directory naming conventation, seperated by page/feature.
-
 If a project doesn't require React Router, you willd build the same way just without using any components from React Router:
 
 ```
@@ -293,4 +300,34 @@ If a project doesn't require React Router, you willd build the same way just wit
 ...
 ```
 
+The components being used in this directory are the page/feature containers from the components directory.
 
+As we mentioned eariler, when the site begins to scale and requests for nested routes, you'll begin placing a file(s) within Screens directory based off the nested route, now let's look at how those files are built:
+
+```
+screens/Root.js
+
+class ScreenRoot extends Component {
+...
+ <Switch>
+    <Route exact path="/" component={Home} />
+    <Route path="/contact" component={Contact} />
+    <Products />
+  </Switch>
+}
+...
+```
+
+```
+screens/Products.js
+
+class ScreenProducts extends Component {
+...
+ <Switch>
+    <Route exact path="/products" component={Products} />
+    <Route path="/products/:productID" component={Product} />
+    ...
+  </Switch>
+}
+...
+```
