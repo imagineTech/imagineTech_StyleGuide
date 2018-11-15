@@ -29,7 +29,7 @@ ImagineTech will be using a MVVM design pattern. Here's how we're breaking the p
   class ContainerComp extends Component {
     handlingFunction = () => {
       ...
-      partentDataValue = "A parent value"
+      parentDataValue = "A parent value"
     }
 
     render() {
